@@ -1,0 +1,49 @@
+
+
+================================= Topics covered: ==========================================
+1)Actuator
+2)Spring data JPA with H2 Database
+3)Circuit breaker - resilience4j
+4)Db cache - Caffeine cache
+5)Async calls
+6)Load Balancing by using Eureka Client
+7)Log pattern
+8)Swagger in account-service app
+
+TODO:
+
+
+AOP
+
+
+
+
+
+=============================================== Explaination ====================================
+Circuit breaker
+In Circuit breaker AOP aspect dependency is mandatory.
+We can add retry mechanism,
+we can exclude some exception on circuit breaker
+
+Actuator:-
+We can run actuator alone on different port
+
+Log pattern:-
+we can give path to save the logs
+
+DB cache:-
+Calling cache method within the class (calling from same class method) won't work as cache, DB invoke will happen.
+The reason is method needs to be public so that method can be proxied. In self invokation it doesn't work because it bypass
+the proxy and call underlying method directly.
+
+Async call:
+It must be applied to public methods only.
+Self-invocation — calling the async method from within the same class — won’t work.
+Method return type should be void or Future<T> like CompletableFuture
+
+create ThreadPoolTaskExecutor object in config and set threadPoolSize to run async call on different thread,
+ otherwise by default synchronous call run on Main thread and
+all async calls run on another single thread (async call execute sequentially by default).
+
+
+

@@ -1,0 +1,39 @@
+
+
+
+management:
+  server.port: 9000
+  health:
+    circuitbreakers:
+      enable: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      getAccount:    #circuit breaker name
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50  # if failure rate above 50% then open close state to half open
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s #wait 5 sec in open state (No external call will happen)
+        permittedNumberOfCallsInHalfOpenState: 3 #number of call in half open state
+        slidingWindowSize: 10 #last 10 call will be recorded when circuit breaker is CLOSED
+        slidingWindowType: COUNT_BASED
+#        ignoreExceptions[0]: TestException
+
+
+
+# retry:
+#      instances:
+#        userService:
+#          maxRetryAttempts: 5
+#          waitDuration: 10s
