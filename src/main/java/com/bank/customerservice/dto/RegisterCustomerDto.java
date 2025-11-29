@@ -17,8 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CustomerDto {
-    private int userId;
+public class RegisterCustomerDto {
     @NotBlank(message = "User name should no be empty")
     @Size(min = 2, max = 20)
     private String name;

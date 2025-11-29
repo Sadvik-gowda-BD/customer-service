@@ -1,6 +1,7 @@
 package com.bank.customerservice.service;
 
 import com.bank.customerservice.dto.CustomerDto;
+import com.bank.customerservice.dto.RegisterCustomerDto;
 import com.bank.customerservice.entity.CustomerEntity;
 import com.bank.customerservice.mapper.CustomerMapper;
 import com.bank.customerservice.repo.CustomerRepo;
@@ -34,8 +35,8 @@ public class CustomerService {
         return CustomerMapper.map(response);
     }
 
-    public CustomerDto createCustomer(CustomerDto customerDto) {
-        CustomerEntity response = customerRepo.save(CustomerMapper.map(customerDto));
+    public CustomerDto createCustomer(RegisterCustomerDto RegisterCustomerDto) {
+        CustomerEntity response = customerRepo.save(CustomerMapper.map(RegisterCustomerDto));
         return CustomerMapper.map(response);
     }
 

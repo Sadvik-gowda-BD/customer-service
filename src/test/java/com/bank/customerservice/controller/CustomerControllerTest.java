@@ -29,7 +29,7 @@ public class CustomerControllerTest {
     void testGetAccount(){
         CustomerDto customerDto = buildCustomerDto();
         when(customerService.getCustomer("101")).thenReturn(customerDto);
-        ResponseEntity<CustomerDto> response = customerController.getAccount("101");
+        ResponseEntity<CustomerDto> response = customerController.getCustomer("101");
         assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
         assertTrue(response.getStatusCode().is2xxSuccessful());
         assertNotNull(response.getBody());

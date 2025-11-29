@@ -4,11 +4,16 @@
 1)Actuator
 2)Spring data JPA with H2 Database
 3)Circuit breaker - resilience4j
-4)Db cache - Caffeine cache
-5)Async calls
-6)Load Balancing by using Eureka Client
-7)Log pattern
-8)Swagger in account-service app
+4)@Retry -resilience4j
+5)Db cache - Caffeine cache
+6)Async calls
+7)Load Balancing by using Eureka Client
+8)Log pattern
+9)Swagger - openAPI docs
+9)Custom annotation
+10)Java custom dto validations
+11)Hashicorp Vault
+12)GlobalExceptionHandler
 
 TODO:
 
@@ -22,11 +27,11 @@ AOP
 =============================================== Explaination ====================================
 Circuit breaker
 In Circuit breaker AOP aspect dependency is mandatory.
-We can add retry mechanism,
+We can add retry mechanism, but not recommended. Use resilience4j @Retry.
 we can exclude some exception on circuit breaker
 
 Actuator:-
-We can run actuator alone on different port
+We can run actuator alone on different port also.
 
 Log pattern:-
 we can give path to save the logs
@@ -46,4 +51,18 @@ create ThreadPoolTaskExecutor object in config and set threadPoolSize to run asy
 all async calls run on another single thread (async call execute sequentially by default).
 
 
+Swagger docs
+URL: http://localhost:8090/bank/swagger-ui/index.html
+
+
+Hashicorp vault
+cmd to run server with custom secret
+>vault server -dev -dev-root-token-id=saduToken
+>set VAULT_ADDR=http://127.0.0.1:8200
+>set VAULT_TOKEN=saduToken
+>vault status //This should give proper response, make sure you are on cmd not power shell
+>vault secrets enable -path=secret kv-v2
+>vault secrets enable -path=kvEngine2 kv-v2 //custom path, enable another KV engine
+>vault kv put kvEngine2/customer-service sec.val1=val1 sec.val2=val2 sec.val3=val3
+>vault kv get kvEngine2/customer-service //To get the secrets
 

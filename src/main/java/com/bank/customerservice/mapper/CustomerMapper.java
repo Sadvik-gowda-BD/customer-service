@@ -2,6 +2,7 @@ package com.bank.customerservice.mapper;
 
 import com.bank.customerservice.dto.AddressDto;
 import com.bank.customerservice.dto.CustomerDto;
+import com.bank.customerservice.dto.RegisterCustomerDto;
 import com.bank.customerservice.entity.AddressEntity;
 import com.bank.customerservice.entity.CustomerEntity;
 
@@ -24,6 +25,17 @@ public class CustomerMapper {
     public static CustomerEntity map(CustomerDto customerDto) {
         return CustomerEntity.builder()
                 .customerId(customerDto.getUserId())
+                .name(customerDto.getName())
+                .age(customerDto.getAge())
+                .emailId(customerDto.getEmailId())
+                .gender(customerDto.getGender())
+                .addressEntity(map(customerDto.getAddress()))
+                .build();
+    }
+
+    public static CustomerEntity map(RegisterCustomerDto customerDto) {
+        return CustomerEntity.builder()
+                .customerId(null) //Customer Id is auto created. Otherwise we get error
                 .name(customerDto.getName())
                 .age(customerDto.getAge())
                 .emailId(customerDto.getEmailId())

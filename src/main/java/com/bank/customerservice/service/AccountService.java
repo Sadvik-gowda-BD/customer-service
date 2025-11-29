@@ -2,6 +2,7 @@ package com.bank.customerservice.service;
 
 import com.bank.customerservice.dto.AccountDto;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,7 @@ public class AccountService {
     private RestTemplate restTemplate;
 
 
+    @Retry(name = "getAcctServiceRetry")
     @CircuitBreaker(name = GET_ACCOUNT_CB, fallbackMethod = "getAccountFallback")
     public AccountDto getAccount(String acctNo) {
         // Easy way :- restTemplate.getForObject(url,responseClass);
